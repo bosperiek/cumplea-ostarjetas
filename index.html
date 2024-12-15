@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Interactive Birthday Card</title>
+</head>
+<body>
+
+    <div class="card" id="card">
+        <div class="cover" onclick="playAudio(); showSlides(); event.stopPropagation()"> Haz clic para abrir </div>
+        <div class="slides" id="slide-1">En este dia tan especial.</div>
+        <div class="slides" id="slide-2">Para una mujer maravillosa y hermosa.</div>
+        <div class="slides" id="slide-3">Te deseo un feliz cumpleaños.</div>
+        <div class="slides" id="slide-4">Te mereces lo mas bonito del mundo.</div>
+        <div class="slides" id="slide-5">Recuerda siempre que eres una persona increíble.</div>
+        <div class="slides" id="slide-6">Te mando un abrazo fuerte.</div>
+        <div class="slides" id="slide-7">Que tengas un muy bonito dia.</div>
+        <div class="slides" id="slide-8">Que todos tus sueños se hagan realidad.</div>
+        <div class="slides" id="slide-9">Te quiero mucho.</div>
+        <div class="slides" id="slide-10">¡Muchas Felicidades!</div>
+    </div>
+
+    
+    <audio id="myAudio" src="/audio/mananitasvicente.mp3"></audio>
+
+    <script>
+        let currentSlide = 1;
+        let totalSlides = 10;
+        let interval;
+
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+
+        function showSlides() {
+            const card = document.getElementById("card");
+            const cover = card.querySelector('.cover');
+            cover.style.display = 'none';
+
+            updateSlide();
+            interval = setInterval(nextSlide, 3000);
+        }
+
+        function updateSlide() {
+            for (let i = 1; i <= totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                slide.classList.remove('active');
+            }
+            const activeSlide = document.getElementById(`slide-${currentSlide}`);
+            activeSlide.classList.add('active');
+        }
+
+        function nextSlide() {
+  if (currentSlide === totalSlides) {
+    clearInterval(interval);
+  } else {
+    currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1;
+    updateSlide();
+  }
+}
+        
+    </script>
+
+</body>
+</html>
